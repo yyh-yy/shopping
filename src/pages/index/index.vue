@@ -6,8 +6,8 @@ import CategoryPanel from './componets/CategoryPanel.vue'
 import HotPanel from './componets/HotPanel.vue'
 import { getHomeBanner, getHomeCategory, getHomeHotAPI } from '@/services/home'
 import type { BannerItem, CategoryItem, HotItem } from '@/types/home.d'
-import type { XtxGuessInstance } from '@/types/component'
 import PageSkeleton from './componets/PageSkeleton.vue'
+import { useGuessList } from '@/composables'
 const bannerList = ref<BannerItem[]>([])
 const getHomeBannerData = async () => {
   const res = await getHomeBanner()
@@ -37,10 +37,7 @@ onLoad(async () => {
   await Promise.all([getHomeBannerData(), getCategoryData(), getHomeData()])
   isLoading.value = false
 })
-const guessRef = ref<XtxGuessInstance>()
-const onScrolltolower = () => {
-  guessRef.value?.getMore()
-}
+const { guessRef, onScrolltolower } = useGuessList()
 const isTriggered = ref(false)
 const onRefresherrefresh = async () => {
   isTriggered.value = true
