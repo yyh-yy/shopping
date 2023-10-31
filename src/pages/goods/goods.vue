@@ -106,6 +106,11 @@ const onAddCart = async (ev: SkuPopupEvent) => {
   uni.showToast({ title: '添加成功', icon: 'success' })
   isShowSku.value = false
 }
+
+//立即购买
+const onBuyNow = (ev: SkuPopupEvent) => {
+  uni.navigateTo({ url: `/pagesOrder/create/create?skuId=${ev._id}&count=${ev.buy_num}` })
+}
 </script>
 
 <template>
@@ -124,6 +129,7 @@ const onAddCart = async (ev: SkuPopupEvent) => {
         backgroundColor: '#E9F8F5',
       }"
       @add-cart="onAddCart"
+      @buy-now="onBuyNow"
     ></vk-data-goods-sku-popup>
     <scroll-view scroll-y class="viewport">
       <!-- 基本信息 -->
@@ -223,7 +229,7 @@ const onAddCart = async (ev: SkuPopupEvent) => {
         <button class="icons-button" open-type="contact">
           <text class="icon-handset"></text>客服
         </button>
-        <navigator class="icons-button" url="/pages/cart/cart" open-type="switchTab">
+        <navigator class="icons-button" url="/pages/cart/cart2" open-type="navigate">
           <text class="icon-cart"></text>购物车
         </navigator>
       </view>
