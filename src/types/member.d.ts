@@ -21,8 +21,22 @@ export type LoginResult = BaseProfile & {
 export type ProfileDetail = BaseProfile & {
     gender?: Gender
     birthday?: string
-    fullLocation: string
-    profession: string
+    fullLocation?: string
+    profession?: string
 }
 
 export type Gender = '女' | '男'
+
+/**
+ * ts 中使用 pick 可以把需要的参数选中
+ *
+ *  */
+
+export type ProfileParams = Pick<
+    ProfileDetail,
+    'nickname' | 'gender' | 'birthday' | 'profession'
+> & {
+    provinceCode?: string
+    cityCode?: string
+    countyCode?: string
+}
